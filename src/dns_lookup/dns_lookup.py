@@ -9,6 +9,7 @@
 
 
 import sys
+import logging
 import dns.resolver
 
 sys.path.insert(
@@ -30,40 +31,30 @@ class DnsLookup:
     numerical addresses. A DNS lookup performs this function.
     """
 
-    def __init__(self, target: str) -> None:
-        """
-        Constructor.
-
-        Args:
-            * target - Domain or IP address to search
-        """
-
-        self.__target = target
-        self.__logger = Logger(self.__class__.__name__)
-
-    @property
-    def target(self) -> str:
-        return self.__target
-
-    @target.setter
-    def targer(self, value: str):
-        self.__target = value
-
-    def dns_lookup(self, record_type: str = 'A') -> list:
+    @staticmethod
+    def dns_lookup(target: str, record_type: str = 'A',
+                   debug: bool = False) -> list:
         """
         Search dns lookup information for IP or Domain.
 
         Args:
+            * target - Domain or IP address to search
             * record_type - one of the ['A', 'CNAME', 'MX']
+            * debug - Activate debug mode
 
         Returns:
             * List of all dns servers up to IP or Domain
         """
 
+        logger = Logger('DnsLookup')
+
+        if debug:
+            logger.setLevel(logging.DEBUG)
+
         ipvs = []
-        self.__logger.info(f'DNS Lookup: {self.__target}')
-        self.__logger.info(f'Records to find out: {record_type}')
-        for ipval in dns.resolver.resolve(self.__target, record_type):
+        logger.info(f'DNS Lookup: {target}')
+        logger.info(f'Records to find out: {record_type}')
+        for ipval in dns.resolver.resolve(target, record_type):
             ipvs.append(ipval.to_text())
-            self.__logger.info(record_type + ' : ' + ipval.to_text())
+            logger.debug(record_type + ' : ' + ipval.to_text())
         return ipvs

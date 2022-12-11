@@ -21,22 +21,13 @@ sys.path.insert(
 from logger.logger import Logger
 
 
+logger = Logger('GetHostname')
+
+
 class GetHostname:
     """
     Gets hostname and IP
     """
-
-    def __init__(self, debug: bool = False) -> None:
-        """
-        Constructor.
-
-        Args:
-            * debug - Activate debug mode
-        """
-
-        self.__logger = Logger(self.__class__.__name__)
-        if debug:
-            self.__logger.setLevel(logging.DEBUG)
 
     def get_hostname(self) -> str:
         """
@@ -46,9 +37,9 @@ class GetHostname:
             * Hostname
         """
 
-        self.__logger.info('Getting hostname')
+        logger.info('Getting hostname')
         hostname = socket.gethostname()
-        self.__logger.debug(f'Hostname: {hostname}')
+        logger.debug(f'Hostname: {hostname}')
         return hostname
 
     def get_ip(self) -> str:
@@ -59,11 +50,11 @@ class GetHostname:
             * Local IP
         """
 
-        self.__logger.info('Getting IP')
+        logger.info('Getting IP')
         request = str(urlopen('http://checkip.dyndns.com/').read())
         ip = r.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(
             request).group(1)
-        self.__logger.debug(f'IP: {ip}')
+        logger.debug(f'IP: {ip}')
         return ip
 
     @staticmethod
@@ -78,5 +69,8 @@ class GetHostname:
             * Hostname and IP
         """
 
-        hostname_ip = GetHostname(debug)
+        if debug:
+            logger.setLevel(logging.DEBUG)
+
+        hostname_ip = GetHostname()
         return hostname_ip.get_hostname(), hostname_ip.get_ip()
