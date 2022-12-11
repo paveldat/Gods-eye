@@ -19,7 +19,6 @@ sys.path.insert(
 from logger.logger import Logger
 
 
-logging.setLoggerClass(Logger)
 logger = logging.getLogger('exec_commands')
 
 

@@ -20,6 +20,9 @@ sys.path.insert(
 from logger.logger import Logger
 
 
+logger = Logger('DnsLookup')
+
+
 class DnsLookup:
     """
     A DNS lookup, in a general sense, is the process by which
@@ -45,8 +48,6 @@ class DnsLookup:
         Returns:
             * List of all dns servers up to IP or Domain
         """
-
-        logger = Logger('DnsLookup')
 
         if debug:
             logger.setLevel(logging.DEBUG)
