@@ -22,13 +22,13 @@ from logger.logger import Logger
 logger = Logger('HttpGrabber')
 
 
-class HttpGrabber:
+class HttpHeadersGrabber:
     """
     HTTP Header Grabber.
     """
 
     @staticmethod
-    def http_grabber(target: str, debug: bool = False) -> dict:
+    def http_headers_grabber(target: str, debug: bool = False) -> dict:
         """
         HTTP Header Grabber.
 
@@ -43,7 +43,7 @@ class HttpGrabber:
         if debug:
             logger.setLevel(logging.DEBUG)
 
-        response = requests.get(target)
-        logger.info(f'Got {target} request: {response.status_code}')
+        response = requests.get(target.lower())
+        logger.info(f'Got {target.lower()} request: {response.status_code}')
         logger.debug(f'Headers:\n {response.headers}')
         return response.headers

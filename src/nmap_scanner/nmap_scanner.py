@@ -52,7 +52,7 @@ class NmapScanner:
             logger.setLevel(logging.DEBUG)
 
         nmScan = nmap.PortScanner()
-        nmScan.scan(target, ports, arguments, sudo)
+        nmScan.scan(target.lower(), ports, arguments, sudo)
         logger.debug(f'Command: {nmScan.command_line()}')
         ports_state = {}
 

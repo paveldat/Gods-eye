@@ -51,7 +51,7 @@ class WhoisLookup:
 
         logger.info('Cleanup console')
         exec_shell_command('reset')
-        command = f'whois {target}'
+        command = f'whois {target.lower()}'
         result = exec_shell_command(command)
         logger.debug(f'{command} output: {result}')
         return result

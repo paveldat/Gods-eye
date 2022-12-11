@@ -53,9 +53,9 @@ class DnsLookup:
             logger.setLevel(logging.DEBUG)
 
         ipvs = []
-        logger.info(f'DNS Lookup: {target}')
+        logger.info(f'DNS Lookup: {target.lower()}')
         logger.info(f'Records to find out: {record_type}')
-        for ipval in dns.resolver.resolve(target, record_type):
+        for ipval in dns.resolver.resolve(target.lower(), record_type):
             ipvs.append(ipval.to_text())
             logger.debug(record_type + ' : ' + ipval.to_text())
         return ipvs
