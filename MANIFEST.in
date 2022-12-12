@@ -1,0 +1,5 @@
+global-exclude *.py[cod]
+include setup.cfg
+include LICENSE
+include README.md
+include pyproject.toml
