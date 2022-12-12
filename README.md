@@ -6,7 +6,6 @@ God's EYE is an Information Gathering Tool I made in python3.10.
 All modules located in the `src` directory are APIs, so you can build a library from the sources and use it in your projects.
 
 ### How to build a library from sources
-#### 1 way
 1) Clone this repo
 ```shell
 git clone https://github.com/paveldat/God-s-eye.git
@@ -29,6 +28,16 @@ python3 -m build
 pip install dist/gods_eye-<version>-py3-none-any.whl
 ```
 
-#### 2 way
-1) Download `.whl` file from releases
-2) 
+## How to use
+Now you can use this library. To connect a module to your project, just import it.
+All modules can be found in the `src` directory.
+
+Example:
+```python
+from clickjacking.clickjacking import ClickJacking
+```
+
+It is not difficult to guess that the following template is used here:
+`from <directory>.<filename> import <class_name>`
+
+Be careful, we don't use the `src` directory anymore.
