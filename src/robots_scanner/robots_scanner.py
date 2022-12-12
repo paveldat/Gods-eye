@@ -25,11 +25,13 @@ logger = Logger('RobotsScanner')
 
 class RobotsScanner:
     """
-    A robots.txt file tells search engine crawlers which URLs the crawler can access on your site.
+    A robots.txt file tells search engine crawlers which URLs
+        the crawler can access on your site.
     This class will search for this file, parse it and return the result.
     """
 
-    def __init__(self, target: str, accept_allow: bool = False, debug: bool = False) -> None:
+    def __init__(self, target: str, accept_allow: bool = False,
+                 debug: bool = False) -> None:
         """
         Constructor.
 
@@ -54,11 +56,18 @@ class RobotsScanner:
         """
 
         self.__target = self.__target.lower()
-        if not (self.__target.startswith('http://') or self.__target.startswith('https://')):
+        if not (self.__target.startswith('http://') or
+                self.__target.startswith('https://')):
             self.__target = 'http://' + self.__target
 
-        self.__target = (self.__target + '/') if not self.__target.endswith('/') else self.__target
-        self.__target = (self.__target + 'robots.txt') if not self.__target.endswith('robots.txt') else self.__target
+        self.__target = (
+            self.__target + '/'
+            ) if not self.__target.endswith('/') else self.__target
+
+        self.__target = (
+            self.__target + 'robots.txt'
+            ) if not self.__target.endswith('robots.txt') else self.__target
+
         logger.info(f'Robots scanner for {self.__target}')
 
         return requests.get(self.__target).text
@@ -75,10 +84,12 @@ class RobotsScanner:
         """
 
         regex_pattern = (
-            r"^((dis)?allow|user)" if self.__accept_allow else r"^(disallow|user)"
+            r"^((dis)?allow|user)" if self.__accept_allow
+            else r"^(disallow|user)"
         )
 
-        return line and bool(re.match(regex_pattern, line.strip(), flags=re.IGNORECASE))
+        return line and bool(re.match(regex_pattern, line.strip(),
+                                      flags=re.IGNORECASE))
 
     def parse_lines(self) -> dict:
         """
@@ -92,14 +103,16 @@ class RobotsScanner:
         logger.debug(robots_text)
 
         logger.info('Checking if each line satisfies the conditions')
-        lines = [line for line in robots_text.splitlines() if self.__check_valid_line(line)]
+        lines = [line for line in robots_text.splitlines()
+                 if self.__check_valid_line(line)]
 
         data_dict = {}
         user_agent = None
         logger.info('Parsing output lines')
         for line in lines:
             if "user agent" in line.lower():
-                line = re.sub(r"user\sagent:", line, "user-agent", flags=re.IGNORECASE)
+                line = re.sub(r"user\sagent:", line, "user-agent",
+                              flags=re.IGNORECASE)
             rule, *values = filter(None, re.split(r"\s+|\t+", line.strip()))
             rule = rule or ""
             value = values[0] if len(values) else ""
@@ -117,9 +130,11 @@ class RobotsScanner:
         return {k: v for k, v in data_dict.items() if v}
 
     @staticmethod
-    def robots_scanner(target: str, accept_allow: bool = False, debug: bool = False) -> dict:
+    def robots_scanner(target: str, accept_allow: bool = False,
+                       debug: bool = False) -> dict:
         """
-        Method for searching robots.txt file, parsing it and returning the result.
+        Method for searching robots.txt file,
+            parsing it and returning the result.
 
         Args:
             * target - Domain
