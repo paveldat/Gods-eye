@@ -19,7 +19,7 @@ sys.path.insert(
 from logger.logger import Logger
 
 
-logger = logging.getLogger('exec_commands')
+logger = Logger('exec_commands')
 
 
 def exec_shell_command(command: str, debug: bool = False) -> str:
