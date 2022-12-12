@@ -2,10 +2,10 @@
 God's EYE - Information Gathering Tool.
 God's EYE is an Information Gathering Tool I made in python3.10.
 
-## Library
+## Library installation
 All modules located in the `src` directory are APIs, so you can build a library from the sources and use it in your projects.
 
-### How to build a library from sources
+### 1. How to build a library from sources
 1) Clone this repo
 ```shell
 git clone https://github.com/paveldat/God-s-eye.git
@@ -26,6 +26,13 @@ python3 -m build
 5) Now you can install library
 ```shell
 pip install dist/gods_eye-<version>-py3-none-any.whl
+```
+
+### 2. Installation from `releases`
+1) Download `.whl` file form releases
+2) Run the following command:
+```shell
+pip install <downloaded_file>.whl
 ```
 
 ## How to use
