@@ -26,7 +26,7 @@ logger = Logger('IpInfoFinder')
 
 class IpInfoFinder:
     """
-    Class to get information by IP or Domain.
+    Gets information by IP or Domain.
     Info: ip, status, region, country, country code,
         region, region name, city, zip, lat, lon,
         timezone, isp, org, as.
