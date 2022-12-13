@@ -72,5 +72,8 @@ class GetHostname:
         if debug:
             logger.setLevel(logging.DEBUG)
 
-        hostname_ip = GetHostname()
-        return hostname_ip.get_hostname(), hostname_ip.get_ip()
+        try:
+            hostname_ip = GetHostname()
+            return hostname_ip.get_hostname(), hostname_ip.get_ip()
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

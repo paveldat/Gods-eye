@@ -55,7 +55,10 @@ class DnsLookup:
         ipvs = []
         logger.info(f'DNS Lookup: {target.lower()}')
         logger.info(f'Records to find out: {record_type}')
-        for ipval in dns.resolver.resolve(target.lower(), record_type):
-            ipvs.append(ipval.to_text())
-            logger.debug(record_type + ' : ' + ipval.to_text())
-        return ipvs
+        try:
+            for ipval in dns.resolver.resolve(target.lower(), record_type):
+                ipvs.append(ipval.to_text())
+                logger.debug(record_type + ' : ' + ipval.to_text())
+            return ipvs
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

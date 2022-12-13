@@ -49,13 +49,16 @@ class ClickJacking:
 
         logger.info(f'Testing ClickJacking for {target}')
 
-        headers = HttpHeadersGrabber.http_headers_grabber(target)
+        try:
+            headers = HttpHeadersGrabber.http_headers_grabber(target)
 
-        if 'X-Frame-Options' in headers.keys():
-            logger.debug('ClickJacking Header is present')
-            logger.debug(f'You can\'t clickjack this domain')
-            return False
-        else:
-            logger.debug('ClickJacking Header is missing')
-            logger.debug('This domain is vulnerable to ClickJacking')
-            return True
+            if 'X-Frame-Options' in headers.keys():
+                logger.debug('ClickJacking Header is present')
+                logger.debug(f'You can\'t clickjack this domain')
+                return False
+            else:
+                logger.debug('ClickJacking Header is missing')
+                logger.debug('This domain is vulnerable to ClickJacking')
+                return True
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

@@ -50,8 +50,11 @@ class WhoisLookup:
             logger.setLevel(logging.DEBUG)
 
         logger.info('Cleanup console')
-        exec_shell_command('reset')
-        command = f'whois {target.lower()}'
-        result = exec_shell_command(command)
-        logger.debug(f'{command} output: {result}')
-        return result
+        try:
+            exec_shell_command('reset')
+            command = f'whois {target.lower()}'
+            result = exec_shell_command(command)
+            logger.debug(f'{command} output: {result}')
+            return result
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

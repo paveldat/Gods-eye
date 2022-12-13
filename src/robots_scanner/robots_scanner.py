@@ -144,6 +144,8 @@ class RobotsScanner:
         Returns:
             * Dictionary of robots.txt rules
         """
-
-        robots = RobotsScanner(target, accept_allow, debug)
-        return robots.parse_lines()
+        try:
+            robots = RobotsScanner(target, accept_allow, debug)
+            return robots.parse_lines()
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

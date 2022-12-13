@@ -51,26 +51,29 @@ class NmapScanner:
         if debug:
             logger.setLevel(logging.DEBUG)
 
-        nmScan = nmap.PortScanner()
-        nmScan.scan(target.lower(), ports, arguments, sudo)
-        logger.debug(f'Command: {nmScan.command_line()}')
-        ports_state = {}
+        try:
+            nmScan = nmap.PortScanner()
+            nmScan.scan(target.lower(), ports, arguments, sudo)
+            logger.debug(f'Command: {nmScan.command_line()}')
+            ports_state = {}
 
-        for host in nmScan.all_hosts():
-            hostname = nmScan[host].hostname()
-            logger.info(f'Host: {host} ({hostname})')
-            logger.info(f'State: {nmScan[host].state()}')
-            try:
-                logger.info('Scan all protocols')
-                for proto in nmScan[host].all_protocols():
-                    logger.info(f'Protocol: {proto}')
-                    lports = sorted(nmScan[host][proto].keys())
-            except KeyError:
-                logger.raise_fatal(ValueError(f'Cannot scan {proto}'))
+            for host in nmScan.all_hosts():
+                hostname = nmScan[host].hostname()
+                logger.info(f'Host: {host} ({hostname})')
+                logger.info(f'State: {nmScan[host].state()}')
+                try:
+                    logger.info('Scan all protocols')
+                    for proto in nmScan[host].all_protocols():
+                        logger.info(f'Protocol: {proto}')
+                        lports = sorted(nmScan[host][proto].keys())
+                except KeyError:
+                    logger.raise_fatal(ValueError(f'Cannot scan {proto}'))
 
-            for port in lports:
-                state = nmScan[host][proto][port]["state"]
-                logger.debug(f'Port: {port}  State: {state}')
-                ports_state[port] = state
+                for port in lports:
+                    state = nmScan[host][proto][port]["state"]
+                    logger.debug(f'Port: {port}  State: {state}')
+                    ports_state[port] = state
 
-        return ports_state
+            return ports_state
+        except Exception as ex:
+            logger.raise_fatal(f'Error occurred {ex}')

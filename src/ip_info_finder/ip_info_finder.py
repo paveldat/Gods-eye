@@ -8,8 +8,10 @@
 """
 
 import sys
+import json
 import logging
-import requests
+import urllib.request
+from urllib.error import URLError
 
 sys.path.insert(
     0,
@@ -19,34 +21,39 @@ sys.path.insert(
 from logger.logger import Logger
 
 
-logger = Logger('HttpGrabber')
+logger = Logger('IpInfoFinder')
 
 
-class HttpHeadersGrabber:
+class IpInfoFinder:
     """
-    HTTP Header Grabber.
+    Class to get information by IP or Domain.
+    Info: ip, status, region, country, country code,
+        region, region name, city, zip, lat, lon,
+        timezone, isp, org, as.
     """
 
     @staticmethod
-    def http_headers_grabber(target: str, debug: bool = False) -> dict:
+    def get_info(target: str, debug: bool = False) -> dict:
         """
-        HTTP Header Grabber.
+        Gets all information about IP or Domain.
 
         Args:
-            * target - Domain or IP address
+            * target - IP or Domain
             * debug - Activate debug mode
 
         Returns:
-            * Dict of the Headers
+            * Dictionary with all info
         """
 
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        logger.info(f'Trying to get info by {target}')
+        ip_api_url = 'http://ip-api.com/json/'
         try:
-            response = requests.get(target.lower())
-            logger.info(f'Got {target} request: {response.status_code}')
-            logger.debug(f'Headers:\n {response.headers}')
-            return response.headers
-        except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            response = urllib.request.urlopen(ip_api_url + target)
+            data = json.loads(response.read())
+            logger.debug(f'Got info:\n {data}')
+            return data
+        except URLError:
+            logger.raise_fatal(f'Not valid IP or Domain: {target}')
