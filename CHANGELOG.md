@@ -1,5 +1,10 @@
 # gods_eye changelog
 
+## 1.0.2
+- Added tools:
+  - pwned
+Checks if your password has been compromised in a data breach.
+
 ## 1.0.1
 - Added tools:
   - ip_info_finder
