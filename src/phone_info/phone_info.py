@@ -12,7 +12,8 @@ import folium
 import logging
 import opencage
 import phonenumbers
-from phonenumbers import geocoder, carrier
+from pathlib import Path
+from phonenumbers import carrier, carrier
 from opencage.geocoder import OpenCageGeocode
 
 sys.path.insert(
@@ -80,7 +81,9 @@ class PhoneInfo:
         self.__logger.debug(f'Operator found: {operator}')
         return operator
 
-    def draw_map(self, api_key: str = None) -> None:
+    def draw_map(self,
+                 api_key: str = None,
+                 path_to_save: [str, Path] = None) -> None:
         """
         Draws map with phone location.
         If api_key is not given - map will not be drawn.
@@ -89,6 +92,7 @@ class PhoneInfo:
             * api_key - If you want to get an approximate location,
                         then you need to get api_key from
                             https://opencagedata.com/
+            * path_to_save - Path to save the map
         """
 
         if api_key is None:
@@ -107,5 +111,9 @@ class PhoneInfo:
         folium.Marker([lat, lng], popup=location).add_to(myMap)
 
         self.__logger.info('Draw map')
-        myMap.save(f'{self.__number}.html')
+        if path_to_save is None:
+            myMap.save(f'{self.__number}.html')
+        else:
+            Path(path_to_save).mkdir(exist_ok=True, parents=True)
+            myMap.save(f'{path_to_save}/{self.__number}.html')
         self.__logger.debug('Map was drawn')
