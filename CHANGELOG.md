@@ -1,5 +1,10 @@
 # gods_eye changelog
 
+## 1.0.3
+- Added tools:
+  - phone_info
+Gets country, operator and location by phone number.
+
 ## 1.0.2
 - Added tools:
   - pwned
