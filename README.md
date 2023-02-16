@@ -41,10 +41,10 @@ All modules can be found in the `src` directory.
 
 Example:
 ```python
-from clickjacking.clickjacking import ClickJacking
+from godseye.clickjacking.clickjacking import ClickJacking
 ```
 
 It is not difficult to guess that the following template is used here:
-`from <directory>.<filename> import <class_name>`
+`from godseye.<directory>.<filename> import <class_name>`
 
 Be careful, we don't use the `src` directory anymore.

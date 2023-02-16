@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.1.0
+- Added `godseye` folder
+
 ## 1.0.4
 - `phone_info` modification.
 Now the map can be saved in the specified path.
