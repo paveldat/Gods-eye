@@ -13,7 +13,7 @@ import logging
 import opencage
 import phonenumbers
 from pathlib import Path
-from phonenumbers import carrier, carrier
+from phonenumbers import geocoder, carrier
 from opencage.geocoder import OpenCageGeocode
 
 sys.path.insert(
@@ -113,7 +113,8 @@ class PhoneInfo:
         self.__logger.info('Draw map')
         if path_to_save is None:
             myMap.save(f'{self.__number}.html')
+            self.__logger.debug(f'Map was saved to {self.__number}.html')
         else:
             Path(path_to_save).mkdir(exist_ok=True, parents=True)
             myMap.save(f'{path_to_save}/{self.__number}.html')
-        self.__logger.debug('Map was drawn')
+            self.__logger.debug(f'Map was saved to {path_to_save}/{self.__number}.html')
