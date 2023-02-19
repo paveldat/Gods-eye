@@ -54,11 +54,10 @@ class ClickJacking:
 
             if 'X-Frame-Options' in headers.keys():
                 logger.debug('ClickJacking Header is present')
-                logger.debug(f'You can\'t clickjack this domain')
+                logger.debug('You can\'t clickjack this domain')
                 return False
-            else:
-                logger.debug('ClickJacking Header is missing')
-                logger.debug('This domain is vulnerable to ClickJacking')
-                return True
+            logger.debug('ClickJacking Header is missing')
+            logger.debug('This domain is vulnerable to ClickJacking')
+            return True
         except Exception as ex:
             logger.raise_fatal(f'Error occurred {ex}')

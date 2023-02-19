@@ -11,17 +11,21 @@ import logging
 
 
 class ConsoleFormatter(logging.Formatter):
+    """
+    Console formatter.
+    """
+
     info_color = '\x1b[0m'
     warning_color = '\x1b[33;20m'
     error_color = '\x1b[31;20m'
-    format = '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
+    console_format = '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
 
     FORMATS = {
-        logging.INFO: info_color + format,
-        logging.WARNING: warning_color + format + info_color,
-        logging.DEBUG: info_color + format,
-        logging.ERROR: error_color + format + info_color,
-        logging.CRITICAL: error_color + format + info_color
+        logging.INFO: info_color + console_format,
+        logging.WARNING: warning_color + console_format + info_color,
+        logging.DEBUG: info_color + console_format,
+        logging.ERROR: error_color + console_format + info_color,
+        logging.CRITICAL: error_color + console_format + info_color
     }
 
     def format(self, record):
@@ -31,14 +35,18 @@ class ConsoleFormatter(logging.Formatter):
 
 
 class FileFormatter(logging.Formatter):
-    format = '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
+    """
+    File formatter.
+    """
+
+    file_format = '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s'
 
     FORMATS = {
-        logging.INFO: format,
-        logging.WARNING: format,
-        logging.DEBUG: format,
-        logging.ERROR: format,
-        logging.CRITICAL: format
+        logging.INFO: file_format,
+        logging.WARNING: file_format,
+        logging.DEBUG: file_format,
+        logging.ERROR: file_format,
+        logging.CRITICAL: file_format
     }
 
     def format(self, record):

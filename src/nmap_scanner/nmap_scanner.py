@@ -52,25 +52,25 @@ class NmapScanner:
             logger.setLevel(logging.DEBUG)
 
         try:
-            nmScan = nmap.PortScanner()
-            nmScan.scan(target.lower(), ports, arguments, sudo)
-            logger.debug(f'Command: {nmScan.command_line()}')
+            nm_scan = nmap.PortScanner()
+            nm_scan.scan(target.lower(), ports, arguments, sudo)
+            logger.debug(f'Command: {nm_scan.command_line()}')
             ports_state = {}
 
-            for host in nmScan.all_hosts():
-                hostname = nmScan[host].hostname()
+            for host in nm_scan.all_hosts():
+                hostname = nm_scan[host].hostname()
                 logger.info(f'Host: {host} ({hostname})')
-                logger.info(f'State: {nmScan[host].state()}')
+                logger.info(f'State: {nm_scan[host].state()}')
                 try:
                     logger.info('Scan all protocols')
-                    for proto in nmScan[host].all_protocols():
+                    for proto in nm_scan[host].all_protocols():
                         logger.info(f'Protocol: {proto}')
-                        lports = sorted(nmScan[host][proto].keys())
+                        lports = sorted(nm_scan[host][proto].keys())
                 except KeyError:
                     logger.raise_fatal(ValueError(f'Cannot scan {proto}'))
 
                 for port in lports:
-                    state = nmScan[host][proto][port]["state"]
+                    state = nm_scan[host][proto][port]["state"]
                     logger.debug(f'Port: {port}  State: {state}')
                     ports_state[port] = state
 

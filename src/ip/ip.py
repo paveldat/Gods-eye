@@ -52,10 +52,10 @@ class GetHostname:
 
         logger.info('Getting IP')
         request = str(urlopen('http://checkip.dyndns.com/').read())
-        ip = r.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(
+        local_ip = r.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(
             request).group(1)
-        logger.debug(f'IP: {ip}')
-        return ip
+        logger.debug(f'IP: {local_ip}')
+        return local_ip
 
     @staticmethod
     def get_hostname_ip(debug: bool = False) -> tuple:

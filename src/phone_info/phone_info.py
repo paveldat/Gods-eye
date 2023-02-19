@@ -98,24 +98,24 @@ class PhoneInfo:
         if api_key is None:
             self.__logger.raise_fatal(ValueError('Api key not given'))
 
-        geocoder = OpenCageGeocode(api_key)
+        geocode = OpenCageGeocode(api_key)
         location = self.get_country()
-        results = geocoder.geocode(location)
+        results = geocode.geocode(location)
 
         self.__logger.info('Get lat and lng')
         lat = results[0]['geometry']['lat']
         lng = results[0]['geometry']['lng']
         self.__logger.debug(f'Lat: {lat}, Lng: {lng}')
 
-        myMap = folium.Map(location=[lat, lng], zoom_start=9)
-        folium.Marker([lat, lng], popup=location).add_to(myMap)
+        my_map = folium.Map(location=[lat, lng], zoom_start=9)
+        folium.Marker([lat, lng], popup=location).add_to(my_map)
 
         self.__logger.info('Draw map')
         if path_to_save is None:
-            myMap.save(f'{self.__number}.html')
+            my_map.save(f'{self.__number}.html')
             self.__logger.debug(f'Map was saved to {self.__number}.html')
         else:
             Path(path_to_save).mkdir(exist_ok=True, parents=True)
-            myMap.save(f'{path_to_save}/{self.__number}.html')
+            my_map.save(f'{path_to_save}/{self.__number}.html')
             self.__logger.debug(f'Map was saved to \
                                  {path_to_save}/{self.__number}.html')
