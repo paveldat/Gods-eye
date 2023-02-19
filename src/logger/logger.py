@@ -58,9 +58,17 @@ class Logger(logging.Logger):
             handler.setLevel(level)
 
     def raise_error(self, exc: BaseException):
+        """
+        Raise error.
+        """
+
         self.error(exc)
         raise exc
 
     def raise_fatal(self, exc: BaseException):
+        """
+        Raise fatal exception.
+        """
+
         self.fatal(exc)
         raise exc

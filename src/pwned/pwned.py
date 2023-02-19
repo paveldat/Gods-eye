@@ -21,8 +21,8 @@ from logger.logger import Logger
 
 
 logger = Logger('pwned')
-check_url = 'https://api.pwnedpasswords.com/range/'
-header = {
+CHECK_URL = 'https://api.pwnedpasswords.com/range/'
+HEADER = {
     'User-Agent': 'password checker'
 }
 
@@ -53,7 +53,7 @@ class PasswordPwned:
         hash_string = sha1.hexdigest().upper()
         prefix = hash_string[0:5]
 
-        request = requests.get(check_url + prefix, headers=header
+        request = requests.get(CHECK_URL + prefix, headers=HEADER
                                ).content.decode('utf-8')
         hashes = dict(t.split(':') for t in request.split('\r\n'))
         hashes = dict((prefix + key, value) for (key, value) in hashes.items())
