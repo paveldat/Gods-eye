@@ -49,6 +49,10 @@ class WhoisLookup:
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        if not isinstance(target, str):
+            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                             f'Got target: {target}'))
+
         logger.info('Cleanup console')
         try:
             exec_shell_command('reset')

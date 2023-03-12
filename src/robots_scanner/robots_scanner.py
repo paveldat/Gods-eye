@@ -47,6 +47,10 @@ class RobotsScanner:
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        if not isinstance(target, str):
+            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                             f'Got target: {target}'))
+
     def __make_request(self) -> str:
         """
         Makes request and returns text of the page.

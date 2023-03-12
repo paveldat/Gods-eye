@@ -51,6 +51,10 @@ class NmapScanner:
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        if not isinstance(target, str):
+            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                             f'Got target: {target}'))
+
         try:
             nm_scan = nmap.PortScanner()
             nm_scan.scan(target.lower(), ports, arguments, sudo)
