@@ -56,4 +56,4 @@ class IpInfoFinder:
             logger.debug(f'Got info:\n {data}')
             return data
         except URLError:
-            logger.raise_fatal(f'Not valid IP or Domain: {target}')
+            logger.raise_fatal(BaseException(f'Not valid IP or Domain: {target}'))

@@ -76,4 +76,4 @@ class NmapScanner:
 
             return ports_state
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))

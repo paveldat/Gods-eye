@@ -52,6 +52,10 @@ class DnsLookup:
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        if not isinstance(target, str):
+            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                             f'Got target: {target}'))
+
         ipvs = []
         logger.info(f'DNS Lookup: {target.lower()}')
         logger.info(f'Records to find out: {record_type}')
@@ -61,4 +65,4 @@ class DnsLookup:
                 logger.debug(record_type + ' : ' + ipval.to_text())
             return ipvs
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))

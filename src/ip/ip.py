@@ -76,4 +76,4 @@ class GetHostname:
             hostname_ip = GetHostname()
             return hostname_ip.get_hostname(), hostname_ip.get_ip()
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))

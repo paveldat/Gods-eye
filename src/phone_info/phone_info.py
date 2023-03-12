@@ -117,5 +117,5 @@ class PhoneInfo:
         else:
             Path(path_to_save).mkdir(exist_ok=True, parents=True)
             my_map.save(f'{path_to_save}/{self.__number}.html')
-            self.__logger.debug(f'Map was saved to \
-                                 {path_to_save}/{self.__number}.html')
+            self.__logger.debug(f'Map was saved to '
+                                f'{path_to_save}/{self.__number}.html')
