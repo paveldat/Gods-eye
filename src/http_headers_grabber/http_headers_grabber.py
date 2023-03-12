@@ -44,9 +44,15 @@ class HttpHeadersGrabber:
             logger.setLevel(logging.DEBUG)
 
         try:
+            if not isinstance(target, str):
+                logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                                 f'Got target: {target}'))
+
+            if not (target.startswith('http://') or target.startswith('https://')):
+                target = 'http://' + target
             response = requests.get(target.lower())
             logger.info(f'Got {target} request: {response.status_code}')
             logger.debug(f'Headers:\n {response.headers}')
             return response.headers
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))

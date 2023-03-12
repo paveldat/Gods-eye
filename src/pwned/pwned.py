@@ -62,9 +62,9 @@ class PasswordPwned:
         for item_hash in hashes:
             if item_hash == hash_string:
                 logger.info('Pwned')
-                logger.debug(f'{password} has previously appeared in\
-                             a data breach, used {hashes[hash_string]} times,\
-                             and should never be used')
+                logger.debug(f'{password} has previously appeared in '
+                             f'a data breach, used {hashes[hash_string]} times, '
+                              'and should never be used')
                 return True
 
         logger.info('No pwnage found')

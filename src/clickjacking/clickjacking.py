@@ -43,6 +43,10 @@ class ClickJacking:
         if debug:
             logger.setLevel(logging.DEBUG)
 
+        if not isinstance(target, str):
+            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
+                                             f'Got target: {target}'))
+
         target = target.lower()
         if not (target.startswith('http://') or target.startswith('https://')):
             target = 'http://' + target
@@ -60,4 +64,4 @@ class ClickJacking:
             logger.debug('This domain is vulnerable to ClickJacking')
             return True
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))

@@ -57,4 +57,4 @@ class WhoisLookup:
             logger.debug(f'{command} output: {result}')
             return result
         except Exception as ex:
-            logger.raise_fatal(f'Error occurred {ex}')
+            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))
