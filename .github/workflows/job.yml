@@ -1,8 +1,6 @@
 name: Build, Test, Deploy
 
-on:
-  push:
-    branches: [ "master" ]
+on: [push]
 
 jobs:
   info:
