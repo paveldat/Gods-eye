@@ -8,8 +8,8 @@
 """
 
 import sys
-import nmap
 import logging
+import nmap
 
 sys.path.insert(
     0,
@@ -73,10 +73,10 @@ class NmapScanner:
                 except KeyError:
                     logger.raise_fatal(ValueError(f'Cannot scan {proto}'))
 
-                for port in lports:
-                    state = nm_scan[host][proto][port]["state"]
-                    logger.debug(f'Port: {port}  State: {state}')
-                    ports_state[port] = state
+                    for port in lports:
+                        state = nm_scan[host][proto][port]["state"]
+                        logger.debug(f'Port: {port}  State: {state}')
+                        ports_state[port] = state
 
             return ports_state
         except Exception as ex:
