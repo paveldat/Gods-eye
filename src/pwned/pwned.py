@@ -64,7 +64,7 @@ class PasswordPwned:
                 logger.info('Pwned')
                 logger.debug(f'{password} has previously appeared in '
                              f'a data breach, used {hashes[hash_string]} times, '
-                              'and should never be used')
+                             'and should never be used')
                 return True
 
         logger.info('No pwnage found')

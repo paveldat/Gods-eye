@@ -1,8 +1,8 @@
 pathlib
-dnspython
+dnspython >= 2.2.1
 requests
-python-nmap
+python-nmap >= 0.7.1
 build
-folium
-opencage
-phonenumbers
+folium >= 0.14.0
+opencage >= 2.1.0
+phonenumbers >= 8.13.2

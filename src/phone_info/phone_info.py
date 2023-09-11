@@ -8,11 +8,11 @@
 """
 
 import sys
-import folium
 import logging
-import opencage
-import phonenumbers
 from pathlib import Path
+
+import folium
+import phonenumbers
 from phonenumbers import geocoder, carrier
 from opencage.geocoder import OpenCageGeocode
 
@@ -47,6 +47,9 @@ class PhoneInfo:
 
     @property
     def number(self) -> str:
+        """
+        Property number method.
+        """
         return self.__number
 
     @number.setter
