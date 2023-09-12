@@ -1,5 +1,9 @@
 # gods_eye changelog
 
+## 1.0.9
+- Add one_sec_mail tool.
+- Update README
+
 ## 1.0.8
 - Add status badge Markdown
 
