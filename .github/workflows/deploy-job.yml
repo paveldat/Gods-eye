@@ -54,22 +54,31 @@ jobs:
           python3 -m pytest -sr tests/test_c*.py
   deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     needs: test
     steps:
       - uses: actions/checkout@v3
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v16
+        id: verify-changed-files
+        with:
+          files: |
+             src/**/*.py
+             setup.cfg
       - name: Download artifacts
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         uses: actions/download-artifact@v3
         with:
           name: built-artifacts
           path: dist
       - name: Publish package to Test PyPI
-        if: github.ref == 'refs/heads/main'
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository-url: https://test.pypi.org/legacy/
       - name: Publish package to PyPI
-        if: github.ref == 'refs/heads/main'
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
