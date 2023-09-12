@@ -63,6 +63,7 @@ jobs:
           name: built-artifacts
           path: dist
       - name: Publish package to Test PyPI
+        if: github.ref == 'refs/heads/main'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
