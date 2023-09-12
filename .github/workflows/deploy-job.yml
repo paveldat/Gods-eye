@@ -78,19 +78,28 @@ jobs:
     needs: deploy
     steps:
       - uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: built-artifacts
+          path: dist
       - name: Set version release
         run: |
           VER="$(cat setup.cfg | grep version | cut -d '=' -f 2 | xargs)"
-          COMMIT_MESSAGE="$(git log -1 --pretty=%B)"
+          {
+            echo 'COMMIT_MESSAGE<<EOF'
+            git log -1 --pretty=%B
+            echo EOF
+          } >> "$GITHUB_ENV"
           echo "RELEASE_VERSION=$VER" >> $GITHUB_ENV
           echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
       - name: Create release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: svenstaro/upload-release-action@v2
         with:
-          tag_name: ${{ env.RELEASE_VERSION }}
-          release_name: v${{ env.RELEASE_VERSION }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*
+          tag: ${{ env.RELEASE_VERSION }}
           body: ${{ env.COMMIT_MESSAGE }}
-          draft: false
-          prerelease: false
+          release_name: v${{ env.RELEASE_VERSION }}
+          overwrite: true
+          file_glob: true
