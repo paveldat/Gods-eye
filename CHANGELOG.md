@@ -1,5 +1,10 @@
 # gods_eye changelog
 
+## 1.0.6
+- Add pipeline.
+  Add deploy to PyPI.
+  Add tests and code check.
+
 ## 1.0.5
 - Pylint check code style
 
