@@ -38,7 +38,7 @@ class DnsLookup:
     def dns_lookup(target: str, record_type: str = 'A',
                    debug: bool = False) -> list:
         """
-        Search dns lookup information for IP or Domain.
+        Looks for dns lookup information for IP or Domain.
 
         Args:
             * target - Domain or IP address to search
