@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.0.8
+- Add status badge Markdown
+
 ## 1.0.7
 - Fix release job to publish release package.
 

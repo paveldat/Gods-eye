@@ -1,3 +1,5 @@
+[![Build, Test, Deploy](https://github.com/paveldat/Gods-eye/actions/workflows/deploy-job.yml/badge.svg)](https://github.com/paveldat/Gods-eye/actions/workflows/deploy-job.yml)
+
 # GOD'S EYE
 God's EYE - Information Gathering Tool.
 God's EYE is an Information Gathering Tool I made in python3.10.
@@ -21,7 +23,7 @@ xargs sudo apt-get install <deb-requirements.txt
 ```
 4) Run the following command
 ```shell
-python3 -m build
+python3 -m build .
 ```
 5) Now you can install library
 ```shell
@@ -48,3 +50,6 @@ It is not difficult to guess that the following template is used here:
 `from <directory>.<filename> import <class_name>`
 
 Be careful, we don't use the `src` directory anymore.
+
+## PyPI
+https://pypi.org/project/gods-eye/
