@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.0.7
+- Fix release job to publish release package.
+
 ## 1.0.6
 - Add pipeline.
   Add deploy to PyPI.
