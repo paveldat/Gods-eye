@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.1.0
+- Update pipeline
+
 ## 1.0.9
 - Add one_sec_mail tool.
 - Update README
