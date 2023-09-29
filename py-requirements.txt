@@ -1,6 +1,5 @@
 pathlib
 dnspython >= 2.2.1
-requests
 python-nmap >= 0.7.1
 build
 folium >= 0.14.0
