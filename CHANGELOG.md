@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.1.1
+- Remove unused dependencies
+
 ## 1.1.0
 - Update pipeline
 
