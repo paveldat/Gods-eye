@@ -70,6 +70,8 @@ from clickjacking.clickjacking import ClickJacking
 
 It is not difficult to guess that the following template is used here:
 `from <directory>.<filename> import <class_name>`
+For example:
+`from clickjacking.clickjacking import ClickJacking`
 
 Be careful, we don't use the `src` directory anymore.
 

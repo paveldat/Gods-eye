@@ -1,5 +1,8 @@
 # gods_eye changelog
 
+## 1.1.2
+- Changed README
+
 ## 1.1.1
 - Remove unused dependencies
 
