@@ -7,19 +7,15 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import sys
 import logging
+import sys
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
-from logger.logger import Logger
 from exec_shell_command.exec_shell_command import exec_shell_command
+from logger.logger import Logger
 
-
-logger = Logger('WhoisLookup')
+logger = Logger("WhoisLookup")
 
 
 class WhoisLookup:
@@ -50,15 +46,19 @@ class WhoisLookup:
             logger.setLevel(logging.DEBUG)
 
         if not isinstance(target, str):
-            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
-                                             f'Got target: {target}'))
+            logger.raise_fatal(
+                BaseException(
+                    f"Target must be a string not {type(target)}. "
+                    f"Got target: {target}"
+                )
+            )
 
-        logger.info('Cleanup console')
+        logger.info("Cleanup console")
         try:
-            exec_shell_command('reset')
-            command = f'whois {target.lower()}'
+            exec_shell_command("reset")
+            command = f"whois {target.lower()}"
             result = exec_shell_command(command)
-            logger.debug(f'{command} output: {result}')
+            logger.debug(f"{command} output: {result}")
             return result
         except Exception as ex:
-            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))
+            logger.raise_fatal(BaseException(f"Error occurred: {ex}"))

@@ -7,19 +7,15 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import sys
 import logging
+import sys
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
-from logger.logger import Logger
 from http_headers_grabber.http_headers_grabber import HttpHeadersGrabber
+from logger.logger import Logger
 
-
-logger = Logger('ClickJacking')
+logger = Logger("ClickJacking")
 
 
 class ClickJacking:
@@ -44,24 +40,28 @@ class ClickJacking:
             logger.setLevel(logging.DEBUG)
 
         if not isinstance(target, str):
-            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
-                                             f'Got target: {target}'))
+            logger.raise_fatal(
+                BaseException(
+                    f"Target must be a string not {type(target)}. "
+                    f"Got target: {target}"
+                )
+            )
 
         target = target.lower()
-        if not (target.startswith('http://') or target.startswith('https://')):
-            target = 'http://' + target
+        if not (target.startswith("http://") or target.startswith("https://")):
+            target = "http://" + target
 
-        logger.info(f'Testing ClickJacking for {target}')
+        logger.info(f"Testing ClickJacking for {target}")
 
         try:
             headers = HttpHeadersGrabber.http_headers_grabber(target)
 
-            if 'X-Frame-Options' in headers.keys():
-                logger.debug('ClickJacking Header is present')
-                logger.debug('You can\'t clickjack this domain')
+            if "X-Frame-Options" in headers.keys():
+                logger.debug("ClickJacking Header is present")
+                logger.debug("You can't clickjack this domain")
                 return False
-            logger.debug('ClickJacking Header is missing')
-            logger.debug('This domain is vulnerable to ClickJacking')
+            logger.debug("ClickJacking Header is missing")
+            logger.debug("This domain is vulnerable to ClickJacking")
             return True
         except Exception as ex:
-            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))
+            logger.raise_fatal(BaseException(f"Error occurred: {ex}"))

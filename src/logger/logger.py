@@ -7,9 +7,10 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import os
 import logging
+import os
 from pathlib import Path
+
 from .formatter import ConsoleFormatter, FileFormatter
 
 
@@ -22,7 +23,7 @@ class Logger(logging.Logger):
         - file handler into file
     """
 
-    def __init__(self, name: str, mode: str = 'a') -> None:
+    def __init__(self, name: str, mode: str = "a") -> None:
         """
         Constructor.
         Logger level can be initializate by env variable `LOGGER_LEVEL`.
@@ -34,17 +35,15 @@ class Logger(logging.Logger):
 
         logging.Logger.__init__(self, name)
 
-        self.setLevel(os.getenv('LOGGER_LEVEL', logging.INFO))
+        self.setLevel(os.getenv("LOGGER_LEVEL", logging.INFO))
 
         console_handler = logging.StreamHandler()
         console_handler.setLevel(self.level)
         console_handler.setFormatter(ConsoleFormatter())
 
-        Path('./out/logs').mkdir(parents=True, exist_ok=True)
+        Path("./out/logs").mkdir(parents=True, exist_ok=True)
         file_handler = logging.FileHandler(
-            f'out/logs/{self.name}.log',
-            mode=mode,
-            encoding='utf-8'
+            f"out/logs/{self.name}.log", mode=mode, encoding="utf-8"
         )
         file_handler.setLevel(self.level)
         file_handler.setFormatter(FileFormatter())

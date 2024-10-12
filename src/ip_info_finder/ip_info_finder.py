@@ -7,21 +7,17 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import sys
 import json
 import logging
+import sys
 import urllib.request
 from urllib.error import URLError
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
 from logger.logger import Logger
 
-
-logger = Logger('IpInfoFinder')
+logger = Logger("IpInfoFinder")
 
 
 class IpInfoFinder:
@@ -48,12 +44,12 @@ class IpInfoFinder:
         if debug:
             logger.setLevel(logging.DEBUG)
 
-        logger.info(f'Trying to get info by {target}')
-        ip_api_url = 'http://ip-api.com/json/'
+        logger.info(f"Trying to get info by {target}")
+        ip_api_url = "http://ip-api.com/json/"
         try:
             response = urllib.request.urlopen(ip_api_url + target)
             data = json.loads(response.read())
-            logger.debug(f'Got info:\n {data}')
+            logger.debug(f"Got info:\n {data}")
             return data
         except URLError:
-            logger.raise_fatal(BaseException(f'Not valid IP or Domain: {target}'))
+            logger.raise_fatal(BaseException(f"Not valid IP or Domain: {target}"))

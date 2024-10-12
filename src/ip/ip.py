@@ -7,21 +7,17 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import sys
-import socket
 import logging
 import re as r
+import socket
+import sys
 from urllib.request import urlopen
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
 from logger.logger import Logger
 
-
-logger = Logger('GetHostname')
+logger = Logger("GetHostname")
 
 
 class GetHostname:
@@ -37,9 +33,9 @@ class GetHostname:
             * Hostname
         """
 
-        logger.info('Getting hostname')
+        logger.info("Getting hostname")
         hostname = socket.gethostname()
-        logger.debug(f'Hostname: {hostname}')
+        logger.debug(f"Hostname: {hostname}")
         return hostname
 
     def get_ip(self) -> str:
@@ -50,11 +46,10 @@ class GetHostname:
             * Local IP
         """
 
-        logger.info('Getting IP')
-        request = str(urlopen('http://checkip.dyndns.com/').read())
-        local_ip = r.compile(r'Address: (\d+\.\d+\.\d+\.\d+)').search(
-            request).group(1)
-        logger.debug(f'IP: {local_ip}')
+        logger.info("Getting IP")
+        request = str(urlopen("http://checkip.dyndns.com/").read())
+        local_ip = r.compile(r"Address: (\d+\.\d+\.\d+\.\d+)").search(request).group(1)
+        logger.debug(f"IP: {local_ip}")
         return local_ip
 
     @staticmethod
@@ -76,4 +71,4 @@ class GetHostname:
             hostname_ip = GetHostname()
             return hostname_ip.get_hostname(), hostname_ip.get_ip()
         except Exception as ex:
-            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))
+            logger.raise_fatal(BaseException(f"Error occurred: {ex}"))
