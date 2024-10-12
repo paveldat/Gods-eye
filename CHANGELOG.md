@@ -3,6 +3,7 @@
 ## 1.2.0
 
 - Add ProbivApiPhoneInfo class for searching information by phone number using probivapi.com
+- Fix code style
 
 ## 1.1.2
 - Changed README

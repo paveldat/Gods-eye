@@ -7,20 +7,16 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-
-import sys
 import logging
+import sys
+
 import dns.resolver
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
 from logger.logger import Logger
 
-
-logger = Logger('DnsLookup')
+logger = Logger("DnsLookup")
 
 
 class DnsLookup:
@@ -35,8 +31,7 @@ class DnsLookup:
     """
 
     @staticmethod
-    def dns_lookup(target: str, record_type: str = 'A',
-                   debug: bool = False) -> list:
+    def dns_lookup(target: str, record_type: str = "A", debug: bool = False) -> list:
         """
         Looks for dns lookup information for IP or Domain.
 
@@ -53,16 +48,20 @@ class DnsLookup:
             logger.setLevel(logging.DEBUG)
 
         if not isinstance(target, str):
-            logger.raise_fatal(BaseException(f'Target must be a string not {type(target)}. '
-                                             f'Got target: {target}'))
+            logger.raise_fatal(
+                BaseException(
+                    f"Target must be a string not {type(target)}. "
+                    f"Got target: {target}"
+                )
+            )
 
         ipvs = []
-        logger.info(f'DNS Lookup: {target.lower()}')
-        logger.info(f'Records to find out: {record_type}')
+        logger.info(f"DNS Lookup: {target.lower()}")
+        logger.info(f"Records to find out: {record_type}")
         try:
             for ipval in dns.resolver.resolve(target.lower(), record_type):
                 ipvs.append(ipval.to_text())
-                logger.debug(record_type + ' : ' + ipval.to_text())
+                logger.debug(record_type + " : " + ipval.to_text())
             return ipvs
         except Exception as ex:
-            logger.raise_fatal(BaseException(f'Error occurred: {ex}'))
+            logger.raise_fatal(BaseException(f"Error occurred: {ex}"))

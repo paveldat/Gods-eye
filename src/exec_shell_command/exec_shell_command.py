@@ -7,19 +7,15 @@
 ▒▐█░░░▐█─░▐█░▒▀▄▀░░▐█▄▄▒██▄▄█░▐█▄█▀░▐█─░▐█░▒▄█▄░
 """
 
-import sys
 import logging
-from subprocess import Popen, PIPE
+import sys
+from subprocess import PIPE, Popen
 
-sys.path.insert(
-    0,
-    'src'
-)
+sys.path.insert(0, "src")
 
 from logger.logger import Logger
 
-
-logger = Logger('exec_commands')
+logger = Logger("exec_commands")
 
 
 def exec_shell_command(command: str, debug: bool = False) -> str:
@@ -38,7 +34,7 @@ def exec_shell_command(command: str, debug: bool = False) -> str:
     if debug:
         logger.setLevel(logging.DEBUG)
 
-    logger.info(f'Executing command: `{command}`')
+    logger.info(f"Executing command: `{command}`")
     with Popen(command, shell=True, stdout=PIPE, stderr=PIPE) as proc:
         status = proc.wait()
         output = proc.stdout.read().decode(sys.stdout.encoding)
